@@ -1,7 +1,7 @@
 <template>
   <Card>
-    <h1 class="text-center font-semibold text-3xl pb-5">Login</h1>
-    <form class="w-[60%] mx-auto space-y-3" @submit.prevent="signIn">
+    <h1 class="text-center font-semibold text-3xl pb-5">Register</h1>
+    <form class="w-[60%] mx-auto space-y-3" @submit.prevent="signUp">
       <FormInput
         label="E-Mail"
         placeholder="Enter your email"
@@ -13,12 +13,17 @@
         placeholder="Enter your password"
         v-model="password"
       />
-      <h6 class="text-red-500 font-medium">{{ errorMsg }}</h6>
+      <FormInput
+        label="Password Confirmation"
+        type="password"
+        placeholder="Re-enter your password"
+        v-model="passwordConfirmation"
+      />
       <button
-        type="submit"
         class="w-full mx-auto mt-8 text-center text-lg text-white font-semibold bg-[#8324de] rounded-2xl hover:opacity-80 transition ease-in py-0.5"
+        type="submit"
       >
-        Login
+        Register
       </button>
     </form>
   </Card>
@@ -29,19 +34,19 @@ const supabase = useSupabaseClient();
 
 const email = ref("");
 const password = ref(null);
-const errorMsg = ref("");
+const passwordConfirmation = ref(null);
 
-const signIn = async () => {
+const signUp = async () => {
   try {
-    let { data, error } = await supabase.auth.signInWithPassword({
+    let { data, error } = await supabase.auth.signUp({
       email: email.value,
       password: password.value,
     });
     if (error) throw error;
-    console.log("User successfully logged in!");
+    console.log("Successfully signed up!");
     navigateTo("/");
   } catch (error) {
-    errorMsg.value = error.message;
+    console.log(error);
   }
 };
 </script>

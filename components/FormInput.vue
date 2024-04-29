@@ -1,11 +1,12 @@
 <template>
   <div class="space-y-1.5">
-    <label v-if="label">{{ label }} </label>
+    <label class="font-semibold" v-if="label">{{ label }} </label>
     <input
+      class="w-full p-2 rounded-xl border border-gray-100 focus:border-gray-300 focus:outline-none transition ease-in placeholder-gray-500 text-sm"
       :value="modelValue"
       :type="type"
       :placeholder="placeholder"
-      class="w-full p-2 rounded-xl border border-gray-100 focus:border-gray-300 focus:outline-none transition ease-in placeholder-gray-500 text-sm"
+      @input="onInput"
     />
   </div>
 </template>
@@ -27,8 +28,9 @@ const props = defineProps({
     type: String,
   },
 });
+const emit = defineEmits();
 
-// const onInput = function (e) {
-//   emit("update:modelValue", e.target.value);
-// };
+const onInput = function (e) {
+  emit("update:modelValue", e.target.value);
+};
 </script>
