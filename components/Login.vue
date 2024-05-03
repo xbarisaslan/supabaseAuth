@@ -39,7 +39,7 @@ const signIn = async () => {
     });
     if (error) throw error;
     console.log("User successfully logged in!");
-    navigateTo("/");
+    navigateTo("/profile");
   } catch (error) {
     errorMsg.value = error.message;
   }
