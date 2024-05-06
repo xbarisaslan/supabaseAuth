@@ -1,7 +1,8 @@
 <template>
-  <div class="h-screen flex items-center justify-center">
-    <Register />
-  </div>
+  <Card>
+    <h1 class="text-center font-semibold text-3xl pb-5">Register</h1>
+    <RegisterForm />
+  </Card>
 </template>
 
 <script setup>

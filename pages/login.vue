@@ -1,7 +1,8 @@
 <template>
-  <div class="h-screen flex items-center justify-center">
-    <Login />
-  </div>
+  <Card>
+    <h1 class="text-center font-semibold text-3xl pb-5">Login</h1>
+    <LoginForm />
+  </Card>
 </template>
 
 <script setup>

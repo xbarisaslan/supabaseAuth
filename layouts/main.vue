@@ -3,7 +3,9 @@
     class="bg-cover h-screen text-white"
     style="background-image: url('/background.png')"
   >
-    <slot></slot>
+    <div class="flex flex-col items-center justify-center h-full">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
