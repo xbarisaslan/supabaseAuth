@@ -4,15 +4,25 @@
       <FormInput label="First Name" placeholder="John" v-model="first_name" />
       <FormInput label="Last Name" placeholder="Doe" v-model="last_name" />
     </div>
-    <FormInput label="E-Mail" placeholder="Enter your email" v-model="email" />
+    <FormInput
+      label="Username"
+      placeholder="Enter your username"
+      v-model="username"
+    />
+
+    <FormInput
+      label="E-Mail"
+      placeholder="Enter your email address"
+      v-model="email"
+    />
     <FormInput
       label="Password"
       type="password"
-      placeholder="Enter your password"
+      placeholder="Enter a strong password"
       v-model="password"
     />
     <FormInput
-      label="Password Confirmation"
+      label="Confirm Password"
       type="password"
       placeholder="Re-enter your password"
       v-model="passwordConfirmation"
@@ -27,20 +37,30 @@ const supabase = useSupabaseClient();
 const email = ref("");
 const password = ref(null);
 const passwordConfirmation = ref(null);
+const username = ref("");
 const first_name = ref("");
 const last_name = ref("");
 
 const signUp = async () => {
   try {
-    let { data, error } = await supabase.auth.signUp({
+    const { user, session, error } = await supabase.auth.signUp({
       email: email.value,
       password: password.value,
+      options: {
+        data: {
+          username: username.value,
+          full_name: `${first_name.value} ${last_name.value}`,
+        },
+      },
     });
-    if (error) throw error;
-    console.log("Successfully signed up!");
+
+    if (error) {
+      throw error;
+    }
+
     navigateTo("/login");
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
   }
 };
 </script>
