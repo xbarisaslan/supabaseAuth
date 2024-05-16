@@ -27,19 +27,29 @@
       placeholder="Re-enter your password"
       v-model="passwordConfirmation"
     />
-    <PrimaryButton> Create account </PrimaryButton>
+    <h6 class="text-red-500 font-medium">{{ errorMsg }}</h6>
+
+    <PrimaryButton> Create account</PrimaryButton>
+
+    <SuccessMsg :active="isActive">
+      {{ successMsg }}
+    </SuccessMsg>
   </form>
 </template>
 
 <script setup>
 const supabase = useSupabaseClient();
 
-const email = ref("");
-const password = ref(null);
-const passwordConfirmation = ref(null);
 const username = ref("");
 const first_name = ref("");
 const last_name = ref("");
+const email = ref("");
+const password = ref(null);
+const passwordConfirmation = ref(null);
+
+const errorMsg = ref("");
+const successMsg = ref("");
+const isActive = ref(false);
 
 const signUp = async () => {
   try {
@@ -57,10 +67,13 @@ const signUp = async () => {
     if (error) {
       throw error;
     }
-
-    navigateTo("/login");
+    successMsg.value = "You have successfully registered!";
+    isActive.value = true;
+    setTimeout(() => {
+      navigateTo("/login");
+    }, 3000);
   } catch (error) {
-    console.error(error.message);
+    errorMsg.value = error.message;
   }
 };
 </script>

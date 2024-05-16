@@ -8,5 +8,6 @@
 <script setup>
 definePageMeta({
   layout: "main",
+  middleware: "login",
 });
 </script>

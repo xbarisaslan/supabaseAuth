@@ -9,6 +9,10 @@
     />
     <h6 class="text-red-500 font-medium">{{ errorMsg }}</h6>
     <PrimaryButton> Login </PrimaryButton>
+
+    <SuccessMsg :active="isActive">
+      {{ successMsg }}
+    </SuccessMsg>
   </form>
 </template>
 
@@ -18,6 +22,8 @@ const supabase = useSupabaseClient();
 const email = ref("");
 const password = ref(null);
 const errorMsg = ref("");
+const successMsg = ref("");
+const isActive = ref(false);
 
 const signIn = async () => {
   try {
@@ -26,8 +32,13 @@ const signIn = async () => {
       password: password.value,
     });
     if (error) throw error;
-    console.log("User successfully logged in!");
-    navigateTo("/profile");
+
+    successMsg.value = "You have successfully logged in! ";
+    isActive.value = true;
+
+    setTimeout(() => {
+      navigateTo("/profile");
+    }, 2000);
   } catch (error) {
     errorMsg.value = error.message;
   }
