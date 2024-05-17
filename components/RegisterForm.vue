@@ -31,6 +31,16 @@
 
     <PrimaryButton> Create account</PrimaryButton>
 
+    <p class="font-medium text-center">
+      Already have an account?
+      <NuxtLink
+        to="/register"
+        class="text-[#8324de] underline underline-offset-2 hover:opacity-75 transition ease-in"
+      >
+        Login now.
+      </NuxtLink>
+    </p>
+
     <SuccessMsg :active="isActive">
       {{ successMsg }}
     </SuccessMsg>

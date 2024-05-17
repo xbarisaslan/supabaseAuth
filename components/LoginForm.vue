@@ -10,6 +10,16 @@
     <h6 class="text-red-500 font-medium">{{ errorMsg }}</h6>
     <PrimaryButton> Login </PrimaryButton>
 
+    <p class="font-medium text-center">
+      Don't have an account yet?
+      <NuxtLink
+        to="/register"
+        class="text-[#8324de] underline underline-offset-2 hover:opacity-75 transition ease-in"
+      >
+        Register now.
+      </NuxtLink>
+    </p>
+
     <SuccessMsg :active="isActive">
       {{ successMsg }}
     </SuccessMsg>
